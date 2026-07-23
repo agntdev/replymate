@@ -7,7 +7,7 @@
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Activate reply suggestions for incoming messages"
+              "text": "Suggestions already enabled."
             }
           }
         ],

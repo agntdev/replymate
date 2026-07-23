@@ -7,7 +7,7 @@
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Cycle through Neutral/Friendly/Professional tone presets"
+              "text": "Tone set to Friendly."
             }
           }
         ],
