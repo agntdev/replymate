@@ -1,19 +1,44 @@
 [
   {
-    "name": "/history",
+    "name": "/history empty",
     "steps": [
       {
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "View last 30 days of message suggestions and user actions"
+              "text": "No history yet. Send a message to generate suggestions."
             }
           }
         ],
         "send": {
           "text": "/history"
         }
+      }
+    ]
+  },
+  {
+    "name": "history shows 30-day data after suggestion used",
+    "steps": [
+      {
+        "send": { "text": "hello" },
+        "expect": [
+          { "method": "sendMessage" }
+        ]
+      },
+      {
+        "send": { "callback": "sg|send|1:1|0|Hello." },
+        "expect": [
+          { "method": "sendMessage" }
+        ]
+      },
+      {
+        "send": { "text": "/history" },
+        "expect": [
+          {
+            "method": "sendMessage"
+          }
+        ]
       }
     ]
   }

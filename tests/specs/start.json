@@ -7,7 +7,7 @@
         "expect": [
           {
             "method": "sendMessage",
-            "payload": { "text": "👋 Welcome! Tap a button below to get started." }
+            "payload": { "text": "Reply suggestions bot. Send a message to receive options.\nSuggestions: enabled (Neutral)." }
           }
         ]
       }

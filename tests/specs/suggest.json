@@ -1,0 +1,46 @@
+[
+  {
+    "name": "suggestion generation on incoming message",
+    "steps": [
+      {
+        "send": { "text": "hello there" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": { "text": "Suggestions (Neutral):\n\n1. Hello. (95%)\n2. Hi there. (88%)\n3. Greetings. (81%)\n4. Good to hear from you. (74%)\n5. Hello, how can I help. (67%)\n\nUse buttons to send or copy." }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "select suggestion sends reply and logs",
+    "steps": [
+      {
+        "send": { "text": "hello" },
+        "expect": [ { "method": "sendMessage" } ]
+      },
+      {
+        "send": { "callback": "sg|send|1:1|0|Hello." },
+        "expect": [
+          { "method": "sendMessage", "payload": { "text": "Hello." } }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "copy action marks copied",
+    "steps": [
+      {
+        "send": { "text": "thanks" },
+        "expect": [ { "method": "sendMessage" } ]
+      },
+      {
+        "send": { "callback": "sg|copy|1:1|0|You are welcome." },
+        "expect": [
+          { "method": "editMessageText", "payload": { "text": "Copied: You are welcome." } }
+        ]
+      }
+    ]
+  }
+]

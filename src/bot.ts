@@ -2,11 +2,38 @@ import { Composer } from "grammy";
 import { createBot, type BotContext, type CreateBotOptions } from "./toolkit/index.js";
 import type { StorageAdapter } from "grammy";
 
-// The per-chat session shape (ephemeral conversation state only). Extend as the
-// bot grows. Durable domain data must NOT live here — use the toolkit's
-// persistent storage (see AGENTS.md).
+// The per-chat session shape. Durable per-chat data (settings, message history)
+// lives here so it is persisted by the toolkit's session storage adapter (Redis
+// in prod, isolated Memory in tests/harness). Ephemeral wizard state can share
+// the bag.
+export type Tone = "Neutral" | "Friendly" | "Professional";
+
+export interface Suggestion {
+  text: string;
+  confidence_score: number;
+  tonality: Tone;
+}
+
+export interface ActionLog {
+  chosen_reply: string;
+  copied_flag: boolean;
+  timestamp: number;
+}
+
+export interface MessageRecord {
+  id: string;
+  sender: string;
+  text: string;
+  timestamp: number;
+  chat_type: string;
+  suggestions: Suggestion[];
+  actions: ActionLog[];
+}
+
 export interface Session {
-  // example: step?: "awaiting_amount";
+  settings?: { enabled: boolean; tone: Tone };
+  msgIds?: string[];
+  messages?: Record<string, MessageRecord>;
 }
 
 export type Ctx = BotContext<Session>;

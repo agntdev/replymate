@@ -7,7 +7,7 @@
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Pause the suggestion feature"
+              "text": "Suggestions disabled."
             }
           }
         ],
